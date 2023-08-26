@@ -1,5 +1,5 @@
 <script setup>
-import TheList from '@/components/TheList.vue';
+import TheList from '@components/TheList.vue'
 import { RouterView, useRoute } from 'vue-router'
 
 const route = useRoute()

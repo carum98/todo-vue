@@ -3,6 +3,7 @@ import { $fetch } from '@utils/fetch'
 import { onMounted, ref } from 'vue'
 import { List } from '@models/list.model'
 import { RouterNames } from '@router/names'
+import IconCircle from '@icons/IconCircle.vue'
 
 // data
 const items = ref([])
@@ -19,9 +20,11 @@ onMounted(() => getData())
 </script>
 
 <template>
+    <button>Add</button>
     <ul>
         <li v-for="item in items" :key="item.id">
             <RouterLink :to="{ name: RouterNames.List, params: { id: item.id } }">
+                <IconCircle :style="{ color: item.color }" />
                 {{ item.name }}
             </RouterLink>
         </li>

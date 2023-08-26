@@ -2,7 +2,7 @@ export class Todo {
     constructor(data) {
         this.id = data['id']
         this.title = data['title']
-        this.is_completed = data['is_completed']
+        this.is_complete = data['is_complete']
 
         Object.freeze(this)
     }
