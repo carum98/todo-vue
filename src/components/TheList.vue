@@ -3,7 +3,35 @@ import { $fetch } from '@utils/fetch'
 import { onMounted, ref } from 'vue'
 import { List } from '@models/list.model'
 import { RouterNames } from '@router/names'
+import { useDialog } from '@composables/useDialog'
+
 import IconCircle from '@icons/IconCircle.vue'
+
+const { open } = useDialog(
+    () => import('@components/ListForm.vue'),
+    {
+        onRefresh: (list) => {
+            const index = items.value.findIndex(i => i.id === list.id)
+
+            if (index === -1) {
+                items.value.push(list)
+            } else {
+                items.value.splice(index, 1, list)
+            }
+        }
+    }
+)
+
+const { open: openDelete } = useDialog(
+    () => import('@components/DeleteConfirmation.vue'),
+    {
+        title: 'Delete list',
+        message: 'Are you sure you want to delete this list?',
+        onRefresh: (list) => {
+            items.value = items.value.filter(i => i.id !== list.id)
+        }
+    }
+)
 
 // data
 const items = ref([])
@@ -20,12 +48,15 @@ onMounted(() => getData())
 </script>
 
 <template>
-    <button>Add</button>
+    <button @click="open">Add</button>
     <ul>
         <li v-for="item in items" :key="item.id">
             <RouterLink :to="{ name: RouterNames.List, params: { id: item.id } }">
                 <IconCircle :style="{ color: item.color }" />
                 {{ item.name }}
+
+                <button @click="open({ list: item })">Edit</button>
+                <button @click="openDelete({ item })">Delete</button>
             </RouterLink>
         </li>
     </ul>
