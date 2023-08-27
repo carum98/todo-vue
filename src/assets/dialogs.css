@@ -19,3 +19,17 @@ dialog:not(#confirm) [data-close] {
     font-size: 35px;
     background: transparent;
 }
+
+.dialog-confirm {
+    & h1 {
+        margin: 0;
+    }
+
+    & button {
+        float: right;
+        background: var(--background);
+        padding: 5px 20px;
+        border-radius: 8px;
+        margin-left: 10px;
+    }
+}

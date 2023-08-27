@@ -33,7 +33,8 @@ const { open: openDelete } = useDialog(
         onRefresh: (list) => {
             items.value = items.value.filter(i => i.id !== list.id)
         }
-    }
+    },
+    false
 )
 
 // data

@@ -43,11 +43,11 @@ function cancel() {
 </script>
 
 <template>
-    <div>
+    <div class="dialog-confirm">
         <h1>{{ title }}</h1>
         <p>{{ message }}</p>
 
-        <button @click="cancel">Cancel</button>
         <button @click="submit">Delete</button>
+        <button @click="cancel">Cancel</button>
     </div>
 </template>

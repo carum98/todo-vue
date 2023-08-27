@@ -2,7 +2,8 @@ import { createApp, h } from 'vue'
 
 export function useDialog(
     component,
-    events
+    events,
+    closeOnBackdrop = true
 ) {
     async function open(props) {
         const dialog = document.createElement('dialog')
@@ -32,11 +33,14 @@ export function useDialog(
             document.body.removeChild(dialog)
         })
 
-        // dialog.addEventListener('click', (event) => {
-        //     if (event.target === dialog) {
-        //         dialog.close()
-        //     }
-        // })
+        if (closeOnBackdrop) {
+            // Close dialog when press backdrop
+            dialog.addEventListener('click', (event) => {
+                if (event.target === dialog) {
+                    dialog.close()
+                }
+            })
+        }
 
         return app
     }
