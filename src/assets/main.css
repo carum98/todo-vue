@@ -1,35 +1,124 @@
-@import './base.css';
+@import 'variables.css';
+@import 'general.css';
+@import 'dialogs.css';
+@import 'layout.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Button actions */
+.actions {
+  display: none;
+  margin-left: auto;
 
-  font-weight: normal;
-}
+  & > button {
+    color: gray;
+    border: none;
+    display: inline-block;
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
+    & > svg {
+      width: 15px;
+      height: 15px;
+    }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+    &:hover {
+        color: white;
+    }
   }
 }
 
-@media (min-width: 1024px) {
-  body {
+/* Headers tables */
+.header-table {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  & button {
+    color: var(--primary-color);
+  }
+
+  & svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+/* Lists */
+.lists {
+  display: flex;
+  flex-flow: column;
+  gap: 15px;
+  max-height: 80vh;
+  overflow: scroll;
+}
+
+.list-item {
+  font-size: 18px;
+  display: flex;
+  border-radius: 15px;
+  
+  border: none;
+  gap: 10px;
+  background-color: #3b3b3b;
+
+  & a {
+    width: 100%;
+    padding: 10px 15px;
     display: flex;
-    place-items: center;
+    gap: 10px;
+    align-items: center;
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  &:hover, .router-link-active {
+      background-color: #202020;
+       border-radius: 15px;
+
+      & .actions {
+          display: inline-block;
+      }
+  }
+}
+
+/* ToDo */
+.todos {
+  & li:not(:last-of-type) {
+      border-bottom: 1px solid gray;
+  }
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  padding-left: 5px;
+  
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+
+  &[data-complete="true"] {
+    color: gray;
+
+    & svg, & button {
+      color: gray;
+    }
+  }
+
+  & > button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 19px;
+    width: 75%;
+  }
+
+  & svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+      background-color: #333333;
+
+      & .actions {
+          display: inline-block;
+      }
   }
 }

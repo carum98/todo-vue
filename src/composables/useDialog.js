@@ -32,6 +32,12 @@ export function useDialog(
             document.body.removeChild(dialog)
         })
 
+        // dialog.addEventListener('click', (event) => {
+        //     if (event.target === dialog) {
+        //         dialog.close()
+        //     }
+        // })
+
         return app
     }
 

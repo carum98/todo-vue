@@ -5,9 +5,10 @@ const { login } = useAuthStore()
 </script>
 
 <template>
+    <h1>Login</h1>
     <form @submit.prevent="login">
-        <input type="text" name="user_name" placeholder="Username" />
+        <input autofocus type="text" name="user_name" placeholder="Username" />
         <input type="password" name="password" placeholder="Password" />
-        <button type="submit">Login</button>
+        <input type="submit" value="Login" >
     </form>
 </template>

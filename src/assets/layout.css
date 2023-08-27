@@ -1,0 +1,28 @@
+.auth-layout {
+    & main {
+        text-align: center;
+    }
+
+    & form {
+        width: 200px;
+        align-items: center;
+    }
+
+    & input {
+        width: 100%;
+    }
+}
+
+.main-layout {
+    & main {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        grid-column-gap: var(--padding);
+        background-color: var(--background);
+        border-radius: 15px;
+        padding: var(--padding);
+        margin: 0 auto;
+    
+        min-width: 800px;
+    }
+}

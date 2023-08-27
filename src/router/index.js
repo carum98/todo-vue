@@ -9,6 +9,9 @@ const router = createRouter({
       path: '/',
       name: RouterNames.Home,
       component: () => import('@views/HomeView.vue'),
+      meta: {
+        layout: 'main-layout'
+      },
       children: [
         {
           path: ':id',
@@ -20,6 +23,9 @@ const router = createRouter({
     {
       path: '/login',
       name: RouterNames.Login,
+      meta: {
+        layout: 'auth-layout'
+      },
       component: () => import('@views/LoginView.vue')
     }
   ]
@@ -29,6 +35,13 @@ const router = createRouter({
 router.beforeEach((to, from) => {
     const store = useAuthStore()
     const isAuthenticated = store.isAuthenticated
+
+    if (to.meta.layout) {
+      const app = document.querySelector('#app')
+
+      app?.classList.remove('auth-layout', 'main-layout')
+      app?.classList.add(to.meta.layout)
+    }
 
     if (!isAuthenticated && to.name !== RouterNames.Login) {
       return { 

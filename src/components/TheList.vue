@@ -6,6 +6,9 @@ import { RouterNames } from '@router/names'
 import { useDialog } from '@composables/useDialog'
 
 import IconCircle from '@icons/IconCircle.vue'
+import IconRemove from '@icons/IconRemove.vue'
+import IconEdit from '@icons/IconEdit.vue'
+import IconAdd from '@icons/IconAdd.vue'
 
 const { open } = useDialog(
     () => import('@components/ListForm.vue'),
@@ -48,15 +51,27 @@ onMounted(() => getData())
 </script>
 
 <template>
-    <button @click="open">Add</button>
-    <ul>
-        <li v-for="item in items" :key="item.id">
+    <header class="header-table">
+        <h2>Lists</h2>
+        <button @click="open">
+            <IconAdd />
+        </button>
+    </header>
+    
+    <ul class="lists">
+        <li class="list-item" v-for="item in items" :key="item.id">
             <RouterLink :to="{ name: RouterNames.List, params: { id: item.id } }">
                 <IconCircle :style="{ color: item.color }" />
                 {{ item.name }}
 
-                <button @click="open({ list: item })">Edit</button>
-                <button @click="openDelete({ item })">Delete</button>
+                <div class="actions">
+                    <button @click.stop.prevent="open({ list: item })">
+                        <IconEdit />
+                    </button>
+                    <button @click.stop.prevent="openDelete({ item })">
+                        <IconRemove />
+                    </button>
+                </div>
             </RouterLink>
         </li>
     </ul>

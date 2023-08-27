@@ -9,6 +9,9 @@ import { onDragStart, onDragOver, onDrop } from '@utils/draggable'
 import IconRadioUnChecked from '@icons/IconRadioUnChecked.vue'
 import IconRadioChecked from '@icons/IconRadioChecked.vue'
 import IconDrag from '@icons/IconDrag.vue'
+import IconRemove from '@icons/IconRemove.vue'
+import IconEdit from '@icons/IconEdit.vue'
+import IconAdd from '@icons/IconAdd.vue'
 
 const route = useRoute()
 
@@ -73,13 +76,20 @@ onMounted(() => getData())
 </script>
 
 <template>
-    <button @click="open">Add</button>
-    <ul>
+    <header class="header-table">
+        <h2>ToDos</h2>
+        <button @click="open">
+            <IconAdd />
+        </button>
+    </header>
+    <ul class="todos">
         <li 
             v-for="item in items" 
             :key="item.id" 
             draggable="true"
+            class="todo-item"
             :data-todo-id="item.id"
+            :data-complete="item.is_complete"
             @dragstart="onDragStart"
             @dragover="onDragOver"
             @drop="onDrop($event, move)"
@@ -92,8 +102,14 @@ onMounted(() => getData())
                 {{ item.title }}
             </button>
 
-            <button @click="open({ todo: item })">Edit</button>
-            <button @click="openDelete({ item })">Delete</button>
+            <div class="actions">
+                <button @click.stop.prevent="open({ todo: item })">
+                    <IconEdit />
+                </button>
+                <button @click.stop.prevent="openDelete({ item })">
+                    <IconRemove />
+                </button>
+            </div>
         </li>
     </ul>
 </template>
