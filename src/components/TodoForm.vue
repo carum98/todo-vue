@@ -44,7 +44,7 @@ async function submit(event) {
 
 <template>
     <form ref="form" @submit.prevent="submit">
-        <input type="text" name="title" :value="todo?.title || ''" placeholder="Title" />
+        <input type="text" name="title" :defaultValue="todo?.title || ''" placeholder="Title" />
         <input type="submit" :disabled="disabled" value="Add">
     </form>
 </template>
