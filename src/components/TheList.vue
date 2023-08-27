@@ -17,7 +17,7 @@ const { open } = useDialog(
             const index = items.value.findIndex(i => i.id === list.id)
 
             if (index === -1) {
-                items.value.push(list)
+                items.value.unshift(list)
             } else {
                 items.value.splice(index, 1, list)
             }
