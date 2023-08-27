@@ -1,6 +1,7 @@
 <script setup>
 import { Todo } from '@models/todo.model'
 import { $fetch } from '@utils/fetch.js'
+import { useFormValidation } from '@composables/useFormValidation'
 
 const props = defineProps({
     listId: {
@@ -19,6 +20,8 @@ const props = defineProps({
         required: true
     }
 })
+
+const { form, disabled } = useFormValidation()
 
 function request(event) {
     const values = Object.fromEntries(new FormData(event.target).entries())
@@ -40,8 +43,8 @@ async function submit(event) {
 </script>
 
 <template>
-    <form @submit.prevent="submit">
+    <form ref="form" @submit.prevent="submit">
         <input type="text" name="title" :value="todo?.title || ''" placeholder="Title" />
-        <button type="submit">Login</button>
+        <input type="submit" :disabled="disabled" value="Add">
     </form>
 </template>

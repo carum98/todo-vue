@@ -1,6 +1,7 @@
 <script setup>
 import { List } from '@models/list.model'
 import { $fetch } from '@utils/fetch.js'
+import { useFormValidation } from '@composables/useFormValidation'
 
 const props = defineProps({
     list: {
@@ -15,6 +16,8 @@ const props = defineProps({
         required: true
     }
 })
+
+const { form, disabled } = useFormValidation()
 
 function request(event) {
     const values = Object.fromEntries(new FormData(event.target).entries())
@@ -36,9 +39,9 @@ async function submit(event) {
 </script>
 
 <template>
-    <form @submit.prevent="submit">
+    <form ref="form" @submit.prevent="submit">
         <input name="name" type="text" :value="list?.name" placeholder="Add new todo" />
         <input name="color" type="color" :value="list?.color" />
-        <button>Add</button>
+        <input type="submit" :disabled="disabled" value="Add">
     </form>
 </template>

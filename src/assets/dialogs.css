@@ -21,10 +21,6 @@ dialog:not(#confirm) [data-close] {
 }
 
 .dialog-confirm {
-    & h1 {
-        margin: 0;
-    }
-
     & button {
         float: right;
         background: var(--background);
