@@ -28,6 +28,20 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    async function register(event) {
+        try {
+            const values = Object.fromEntries(new FormData(event.target).entries())
+
+            const data = await $fetch.post('/register', values)
+
+            token.value = data.token
+
+            router.replace({ name: RouterNames.Home })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     function logout() {
         token.value = null
         router.replace({ name: RouterNames.Login })
@@ -46,6 +60,7 @@ export const useAuthStore = defineStore('auth', () => {
         token, 
         isAuthenticated, 
         login, 
+        register,
         logout
      }
 })

@@ -10,7 +10,8 @@ const router = createRouter({
       name: RouterNames.Home,
       component: () => import('@views/HomeView.vue'),
       meta: {
-        layout: 'main-layout'
+        layout: 'main-layout',
+        auth: true
       },
       children: [
         {
@@ -24,9 +25,19 @@ const router = createRouter({
       path: '/login',
       name: RouterNames.Login,
       meta: {
-        layout: 'auth-layout'
+        layout: 'auth-layout',
+        auth: false
       },
       component: () => import('@views/LoginView.vue')
+    },
+    {
+      path: '/register',
+      name: RouterNames.Register,
+      meta: {
+        layout: 'auth-layout',
+        auth: false
+      },
+      component: () => import('@views/RegisterView.vue')
     }
   ]
 })
@@ -43,14 +54,12 @@ router.beforeEach((to, from) => {
       app?.classList.add(to.meta.layout)
     }
 
-    if (!isAuthenticated && to.name !== RouterNames.Login) {
+    if (to.meta.auth && !isAuthenticated) {
       return { 
         name: RouterNames.Login
       }
-    } else if (isAuthenticated && to.name === RouterNames.Login) {
-      return { 
-        name: RouterNames.Home
-      }
+    } else {
+      return true
     }
 })
 
