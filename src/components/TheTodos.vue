@@ -17,6 +17,18 @@ const route = useRoute()
 
 const listId = route.params.id
 
+const count = {
+    element: () => document.querySelector(`[data-list-id="${listId}"]`).querySelector('.count'),
+    increment() {
+        const element = this.element()
+        element.textContent = parseInt(element.textContent) + 1
+    },
+    decrement() {
+        const element = this.element()
+        element.textContent = parseInt(element.textContent) - 1
+    }
+}
+
 const { open } = useDialog(
     () => import('@components/TodoForm.vue'),
     {
@@ -26,6 +38,7 @@ const { open } = useDialog(
 
             if (index === -1) {
                 items.value.push(todo)
+                count.increment()
             } else {
                 items.value.splice(index, 1, todo)
             }
@@ -40,6 +53,7 @@ const { open: openDelete } = useDialog(
         message: 'Are you sure you want to delete this todo?',
         onRefresh: (todo) => {
             items.value = items.value.filter(i => i.id !== todo.id)
+            count.decrement()
         }
     },
     false
@@ -62,6 +76,12 @@ async function toggle(item) {
     const todo = new Todo(data)
 
     items.value.splice(index, 1, todo)
+
+    if (todo.is_complete) {
+        count.decrement()
+    } else {
+        count.increment()
+    }
 }
 
 async function move(id, index) {

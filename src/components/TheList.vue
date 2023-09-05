@@ -61,9 +61,17 @@ onMounted(() => getData())
     
     <ul class="lists">
         <li class="list-item" v-for="item in items" :key="item.id">
-            <RouterLink :to="{ name: RouterNames.List, params: { id: item.id } }">
+            <RouterLink 
+                :to="{ name: RouterNames.List, params: { id: item.id } }" 
+                :data-list-id="item.id"
+            >
                 <IconCircle :style="{ color: item.color }" />
+
                 {{ item.name }}
+
+                <span class="count">
+                    {{ item.count.pending }}
+                </span>
 
                 <div class="actions">
                     <button @click.stop.prevent="open({ list: item })">
