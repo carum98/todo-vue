@@ -67,7 +67,7 @@ onMounted(() => getData())
             >
                 <IconCircle :style="{ color: item.color }" />
 
-                {{ item.name }}
+                <p>{{ item.name }}</p>
 
                 <span class="count">
                     {{ item.count.pending }}

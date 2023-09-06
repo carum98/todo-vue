@@ -3,6 +3,8 @@ import { List } from '@models/list.model'
 import { $fetch } from '@utils/fetch.js'
 import { useFormValidation } from '@composables/useFormValidation'
 
+import ColorPicker from '@components/ColorPicker.vue'
+
 const props = defineProps({
     list: {
         type: List,
@@ -41,7 +43,7 @@ async function submit(event) {
 <template>
     <form ref="form" @submit.prevent="submit">
         <input name="name" type="text" :defaultValue="list?.name" placeholder="Add new todo" />
-        <input name="color" type="color" :defaultValue="list?.color" />
+        <ColorPicker :defaultValue="list?.color"  />
         <input type="submit" :disabled="disabled" value="Add">
     </form>
 </template>

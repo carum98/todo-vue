@@ -66,6 +66,16 @@
     align-items: center;
   }
 
+  & p {
+    margin: 0;
+
+    /* Text overflow */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+  }
+
   &:hover, .router-link-active {
       background-color: #202020;
       border-radius: 15px;
