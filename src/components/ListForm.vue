@@ -42,7 +42,7 @@ async function submit(event) {
 
 <template>
     <form ref="form" @submit.prevent="submit">
-        <input name="name" type="text" :defaultValue="list?.name" placeholder="Add new todo" />
+        <input name="name" type="text" :defaultValue="list?.name" placeholder="Name" />
         <ColorPicker :defaultValue="list?.color"  />
         <input type="submit" :disabled="disabled" value="Add">
     </form>
